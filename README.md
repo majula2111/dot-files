@@ -4,5 +4,6 @@
 
 ## Contents
 
-- vim (neovim) config
-- fish config
+- vim (neovim)
+- fish
+- kitty
