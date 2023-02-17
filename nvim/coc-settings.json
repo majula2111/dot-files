@@ -1,0 +1,18 @@
+{
+  "diagnostic.displayByAle": true,
+  "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/15.0.1/clangd_15.0.1/bin/clangd",
+  "languageserver": {
+   "cmake": {
+      "command": "cmake-language-server",
+      "filetypes": [
+        "cmake"
+      ],
+      "rootPatterns": [
+        "build/"
+      ],
+      "initializationOptions": {
+        "buildDirectory": "build"
+      }
+    }
+  }
+}
