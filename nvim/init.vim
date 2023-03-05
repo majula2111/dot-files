@@ -1,6 +1,7 @@
 :set autoindent
+:set expandtab
 :set tabstop=2
-:set smarttab
+:set shiftwidth=2
 :set softtabstop=2
 :set mouse=a
 :set encoding=UTF-8
@@ -9,11 +10,15 @@
 :set termguicolors
 :set autoread
 :set relativenumber
-:set number 
+:set number
+:set list
+
+set lcs+=space:·
 
 call plug#begin()
 
 Plug 'https://github.com/vim-airline/vim-airline'
+Plug 'nvim-tree/nvim-web-devicons'
 Plug 'https://github.com/preservim/nerdtree'
 Plug 'https://github.com/ap/vim-css-color'
 Plug 'https://github.com/ryanoasis/vim-devicons'
@@ -26,18 +31,20 @@ Plug 'https://github.com/tpope/vim-fugitive'
 Plug 'https://github.com/airblade/vim-gitgutter'
 Plug 'https://github.com/ajmwagar/vim-deus'
 Plug 'https://github.com/morhetz/gruvbox'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
 
 call plug#end()
 
 " theme
 colorscheme gruvbox
 
+" nerd tree
 nnoremap <C-n> :NERDTreeToggle<CR>
 
 nmap <F8> :TagbarToggle<CR>
 
 " coc config
-
 function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
@@ -65,6 +72,11 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
+" Remap keys for applying refactor code actions
+nmap <silent> <leader>re <Plug>(coc-codeaction-refactor)
+xmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
+nmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
+
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call ShowDocumentation()<CR>
 
@@ -77,7 +89,6 @@ function! ShowDocumentation()
 endfunction
 
 " ale config
-
 let g:ale_fixers = {
  \ 'javascript': ['eslint'],
  \ 'json': ['jq']
@@ -107,3 +118,10 @@ let g:gitgutter_set_sign_backgrounds = 0
 " copy to clipboard macos
 vnoremap <C-c> :w !pbcopy<CR><CR>
 noremap <C-v> :r !pbpaste<CR><CR>
+
+" Find files using Telescope
+nnoremap ff <cmd>Telescope find_files<cr>
+nnoremap fg <cmd>Telescope live_grep<cr>
+nnoremap fb <cmd>Telescope buffers<cr>
+nnoremap fh <cmd>Telescope help_tags<cr>
+
